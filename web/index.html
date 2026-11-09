@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080e27"><meta name="description" content="Tvůj vlastní školní prostor. Úkoly, rozvrh, zápisky a soustředění na jednom místě.">
+  <title>Orbit · Školní dashboard</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="manifest" href="./manifest.webmanifest"><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Hlavní navigace">
+      <a class="brand" href="#home" data-action="navigate" data-view="home" aria-label="Orbit, přehled"><span class="brand-orbit"></span><span>orbit<span class="brand-dot">.</span></span></a>
+      <div class="workspace"><span class="workspace-icon">IT</span><div><strong>Školní dashboard</strong><span>Tvoje škola</span></div><span class="tiny-dot"></span></div>
+      <p class="nav-caption">NAVIGACE</p>
+      <nav id="nav"></nav>
+      <div class="sidebar-bottom"><div class="small-promo"><span class="spark">⌘ K</span><strong>Rychlé ovládání</strong><p>Hledání · ⌘ K<br>Nový úkol · N</p><button class="subtle-button" data-action="focus">Spustit časovač <span>↗</span></button></div>
+      <button class="settings-nav" data-view="settings" data-action="navigate"><span data-icon="settings"></span>Nastavení <span class="key">⌘ ,</span></button>
+      <div class="profile"><div class="avatar">ST</div><div><strong id="profileName">Student</strong><span>Osobní prostor</span></div><span class="profile-mark">✦</span></div></div>
+    </aside>
+    <main>
+      <header class="topbar"><div class="breadcrumbs">Můj prostor <span>/</span> <strong id="breadcrumb">Přehled</strong></div><div class="top-actions"><button class="search-trigger" data-action="search"><span data-icon="search"></span><span>Najít cokoliv…</span><kbd>⌘ K</kbd></button><span class="private-badge"><span></span>Soukromé</span><button class="icon-button" data-action="navigate" data-view="settings" aria-label="Otevřít nastavení"><span data-icon="settings"></span></button></div></header>
+      <div id="content"></div>
+      <footer><span>orbit. <span class="muted">4.3 · Školní dashboard · 2026/27</span></span><span id="save-status">Ukládáno v tomto prohlížeči <i></i></span></footer>
+    </main>
+  </div>
+  <dialog id="modal"><div id="modal-content"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
