@@ -1,74 +1,50 @@
-# Osobní školní dashboard (Orbit)
+<p align="center"><img src="web/icon.svg" width="84" alt="Orbit"></p>
 
-Školní dashboard pro macOS: rozvrh, známky, úkoly, poznámky a časovač. Swift/AppKit/WebKit, HTML/CSS/JavaScript a lokální Python konektor.
+<h1 align="center">Orbit</h1>
+<p align="center"><strong>Osobní školní dashboard</strong><br>Úkoly, rozvrh, známky a soustředění. Tvoje škola na jednom místě.</p>
 
-**Experimentální veřejná šablona zdrojového kódu.** Neobsahuje skutečné účty, školní data ani osobní Notion odkazy. Není to zatím hotový instalátor pro spolužáky: nastavení účtu vyžaduje lokální konfiguraci a sestavení.
+<p align="center">
+<a href="https://github.com/AjtakDan/osobni-skolni-dashboard/releases/download/v4.3.0-preview.1/Orbit-4.3-macOS-AppleSilicon.zip"><img src="docs/download-mac.svg" width="300" alt="Stáhnout Orbit pro Mac – Apple silicon, macOS 14+"></a>
+<a href="https://github.com/AjtakDan/osobni-skolni-dashboard/releases/download/v4.3.0-preview.1/Orbit-4.3-Browser.zip"><img src="docs/download-browser.svg" width="300" alt="Stáhnout verzi do prohlížeče"></a>
+</p>
+<p align="center"><sub>Experimentální veřejná verze 4.3 · zdarma · bez přibalených účtů a osobních dat</sub></p>
 
-## Náhled
+![Skutečný náhled aplikace Orbit s ukázkovými daty](docs/preview.jpg)
 
-```sh
-python3 native/build.py --html-only
-```
+<p align="center"><sub>Náhled používá pouze ukázkové úkoly a rozvrh.</sub></p>
 
-Otevři `out/Orbit.html`. Přímá synchronizace EduPage je dostupná pouze v nativní aplikaci.
+## Stáhnout a spustit
 
-## Sestavení pro Mac
+1. Klikni na **Stáhnout pro Mac** a rozbal stažený ZIP.
+2. Přesuň **Orbit.app** do složky **Applications / Aplikace** a otevři ji.
+3. Přidej si vlastní úkoly, hodiny a předměty. V **Nastavení → Otevřít ukázkový režim** si můžeš vše nejdřív prohlédnout.
 
-Potřebuješ macOS 14+, Swift z Xcode/Command Line Tools a Python 3.9+.
+**Mac verze je pro čipy M1, M2, M3, M4, M5 a další Apple silicon, s macOS 14 nebo novějším.** Sestavení není notarizované Applem. Pokud macOS spuštění zablokuje, použij verzi do prohlížeče.
 
-1. Zkopíruj příklad konfigurace:
+**Verze do prohlížeče:** rozbal ZIP a dvojklikem otevři **Orbit.html** v Chromu nebo Safari. Není potřeba instalace, Git ani programování. Prohlížečová verze nepodporuje přímou synchronizaci EduPage.
 
-   ```sh
-   cp native/Configuration.example.swift native/Configuration.local.swift
-   ```
+[Zobrazit všechny soubory ke stažení a poznámky k verzi →](https://github.com/AjtakDan/osobni-skolni-dashboard/releases/tag/v4.3.0-preview.1)
 
-2. V lokálním souboru doplň `username` a `school` (pouze subdoménu před `.edupage.org`). **Heslo do souboru nepiš.** Lokální konfigurace se nesmí publikovat; Git ji ignoruje.
-3. Sestav:
+## Co v Orbitu najdeš
 
-   ```sh
-   python3 native/build.py
-   ```
+- **Úkoly a testy** – termíny, priority a přehled toho, co zbývá dokončit.
+- **Rozvrh a předměty** – vlastní hodiny, poznámky a odkazy k výuce.
+- **Známky** – ruční evidence a přehled průměrů.
+- **Soustředění** – časovač na 25, 45 nebo 60 minut.
+- **Zálohy** – export a obnova vlastních dat v Nastavení.
 
-4. Otevři `out/Orbit.app`. V Nastavení doplň vlastní školní e-mail a adresu EduPage odpovídající konfiguraci. Pak spusť synchronizaci. Heslo se zadává do zabezpečeného pole a lze je uložit do Klíčenky. Konektor při prvním použití stáhne `edupage-api` do vlastního Python prostředí.
+## Školní účty a synchronizace
 
-Aplikace používá oddělený identifikátor veřejné šablony. Sestavení není notarizované Applem. Distribuce hotové aplikace vyžaduje další testování a vyřešení podpisu.
+**Stažená verze funguje jako samostatný organizér s ručním zadáváním.** Neobsahuje připojený školní účet. Vyplnění e-mailu v Nastavení samo o sobě nepropojí školní služby.
 
-## Co ještě není dokončené
+Automatická synchronizace EduPage v této veřejné šabloně vyžaduje vlastní lokální konfiguraci a sestavení podle [technického postupu](docs/DEVELOPMENT.md). Automatický přenos z Classroom ani obsahová synchronizace Notion zatím nejsou dokončené. Nejde o univerzální instalátor se zaručeným propojením každé školy.
 
-- Automatický přenos Classroom do nativní aplikace.
-- Obecný onboarding bez úprav lokální konfigurace a sestavení.
-- Interaktivní CAPTCHA/2FA v konektoru EduPage.
-- Obsahová synchronizace Notion; vlastní odkazy lze přidávat u předmětů.
+Data se ukládají na tvém zařízení. Mezi zařízeními ani prohlížeči se automaticky nepřenášejí; pro přenos používej zálohu. Veřejný náhled a stažené balíčky neobsahují skutečné školní údaje.
 
-Konektor EduPage je neoficiální a může přestat fungovat při změně služby. Časy zvonění a hranice odhadu známky v `web/core.js` je nutné ověřit pro konkrétní školu. Žádná výsledná školní známka není zaručená místním výpočtem.
+## Pro vývojáře
 
-## Testy
-
-Spouštěj z kořene repozitáře. Potřebuješ Python a Node.js s ES moduly.
-
-```sh
-node tests/blocks.test.mjs
-node tests/summary.test.mjs
-node tests/edupage.test.mjs
-python3 tests/grade_reader_test.py
-python3 tests/adapter_test.py
-python3 tests/slots_test.py
-```
-
-Testy používají syntetická data, ne skutečný účet, a neověřují grafické okno.
-
-## Obsah repozitáře
-
-- `web/` – rozhraní a logika, prázdná osobní data.
-- `native/` – macOS obálka, konektor a sestavení.
-- `tests/` – testy a syntetické příklady.
-- `LICENSE` – GPL verze 3.
-- `THIRD_PARTY_NOTICES.md` – závislosti a jejich licence.
-
-## Soukromí
-
-Nenahrávej původní osobní ZIP aplikace, složku Orbit Data, `state.json`, `previous.json`, zálohy ani vlastní `Configuration.local.swift`. `.gitignore` nechrání soubory ručně nahrané přes web GitHubu. Repozitář má obsahovat pouze tento vyčištěný zdrojový balíček.
+[Zdrojový kód, vlastní sestavení, testy a známá omezení →](docs/DEVELOPMENT.md)
 
 ## Licence
 
-Veřejná varianta zdrojového kódu: GPL-3.0-or-later, viz `LICENSE`. Závislost `edupage-api` má vlastní autory a oznámení uvedené v `THIRD_PARTY_NOTICES.md`. Projekt není oficiální aplikací EduPage ani Google.
+Projekt je dostupný pod [GPL-3.0-or-later](LICENSE). [Oznámení k závislostem](THIRD_PARTY_NOTICES.md). Orbit je nezávislý projekt; není oficiální aplikací EduPage ani Google.
