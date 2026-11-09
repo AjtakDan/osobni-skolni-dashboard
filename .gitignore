@@ -1,0 +1,21 @@
+# Local account configuration and personal data
+native/Configuration.local.swift
+.env
+.env.*
+!.env.example
+state.json
+previous.json
+*backup*.json
+*zaloha*.json
+Orbit Data/
+*.log
+# Build outputs and dependencies
+build/
+out/
+*.app/
+*.zip
+.venv/
+connector-venv/
+__pycache__/
+*.pyc
+.DS_Store
